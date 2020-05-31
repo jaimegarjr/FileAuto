@@ -4,24 +4,26 @@ import shutil
 import sys
 import time
 import logging
+import pathlib
+from dotenv import load_dotenv
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+load_dotenv()
 
 # set current working directory to Downloads folder
-os.chdir('C:\\Users\\jjgar\\Downloads')
+os.chdir(os.environ['PATH_TO_DOWNLOADS'])
+
+# if directories don't exist, create them
+pathlib.Path('PDF\'s').mkdir(parents=True, exist_ok=True)
+pathlib.Path('Images').mkdir(parents=True, exist_ok=True)
+pathlib.Path('EXE\'s').mkdir(parents=True, exist_ok=True)
+pathlib.Path('Misc').mkdir(parents=True, exist_ok=True)
 
 # directories to each folder in Downloads
-pdfdir = 'C:\\Users\\jjgar\\Downloads\\PDF\'s'
-imgdir = 'C:\\Users\\jjgar\\Downloads\\Images'
-exedir = 'C:\\Users\\jjgar\\Downloads\\EXE\'s'
-miscdir = 'C:\\Users\\jjgar\\Downloads\\Misc'
-
-# TODO: if directories don't exist, create them
-# if not os.path.exists(pdfdir):
-#     os.makedirs('PDF\'s')
-#     os.makedirs('Images')
-#     os.makedirs('EXE\'s')
-#     os.makedirs('Misc')
+pdfdir = str(os.path.abspath("PDF's"))
+imgdir = str(os.path.abspath("Images"))
+exedir = str(os.path.abspath("EXE's"))
+miscdir = str(os.path.abspath("Misc"))
 
 
 # class for file handling
@@ -63,7 +65,7 @@ class FileHandler(FileSystemEventHandler):
 
 
 # path to Downloads folder
-path = 'C:\\Users\\jjgar\\Downloads'
+path = os.environ['PATH_TO_DOWNLOADS']
 
 # create an object of FileHandler class
 event_handler = FileHandler()
