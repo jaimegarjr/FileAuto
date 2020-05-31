@@ -23,12 +23,14 @@ class FileHandler(FileSystemEventHandler):
         pathlib.Path('Images').mkdir(parents=True, exist_ok=True)
         pathlib.Path('EXE\'s').mkdir(parents=True, exist_ok=True)
         pathlib.Path('Misc').mkdir(parents=True, exist_ok=True)
+        pathlib.Path('ZIP\'s').mkdir(parents=True, exist_ok=True)
 
         # directories to each folder in Downloads
         pdfdir = str(os.path.abspath("PDF's"))
         imgdir = str(os.path.abspath("Images"))
         exedir = str(os.path.abspath("EXE's"))
         miscdir = str(os.path.abspath("Misc"))
+        zipdir = str(os.path.abspath("ZIP's"))
 
         # get a list of current files in directory
         items = os.listdir()
@@ -43,6 +45,7 @@ class FileHandler(FileSystemEventHandler):
             items.remove("EXE's")
             items.remove("Misc")
             items.remove("Images")
+            items.remove("ZIP's")
         except ValueError:
             pass
 
@@ -62,6 +65,9 @@ class FileHandler(FileSystemEventHandler):
 
             elif filexts[x] == '.exe':
                 shutil.move(items[x], exedir)
+
+            elif filexts[x] == '.zip':
+                shutil.move(items[x], zipdir)
 
             elif filexts[x] == '':
                 shutil.move(items[x], miscdir)
