@@ -13,23 +13,23 @@ load_dotenv()
 # set current working directory to Downloads folder
 os.chdir(os.environ['PATH_TO_DOWNLOADS'])
 
-# if directories don't exist, create them
-pathlib.Path('PDF\'s').mkdir(parents=True, exist_ok=True)
-pathlib.Path('Images').mkdir(parents=True, exist_ok=True)
-pathlib.Path('EXE\'s').mkdir(parents=True, exist_ok=True)
-pathlib.Path('Misc').mkdir(parents=True, exist_ok=True)
-
-# directories to each folder in Downloads
-pdfdir = str(os.path.abspath("PDF's"))
-imgdir = str(os.path.abspath("Images"))
-exedir = str(os.path.abspath("EXE's"))
-miscdir = str(os.path.abspath("Misc"))
-
 
 # class for file handling
 class FileHandler(FileSystemEventHandler):
     # when Downloads folder is modified
     def on_modified(self, event):
+        # if directories don't exist, create them
+        pathlib.Path('PDF\'s').mkdir(parents=True, exist_ok=True)
+        pathlib.Path('Images').mkdir(parents=True, exist_ok=True)
+        pathlib.Path('EXE\'s').mkdir(parents=True, exist_ok=True)
+        pathlib.Path('Misc').mkdir(parents=True, exist_ok=True)
+
+        # directories to each folder in Downloads
+        pdfdir = str(os.path.abspath("PDF's"))
+        imgdir = str(os.path.abspath("Images"))
+        exedir = str(os.path.abspath("EXE's"))
+        miscdir = str(os.path.abspath("Misc"))
+
         # get a list of current files in directory
         items = os.listdir()
 
@@ -38,10 +38,13 @@ class FileHandler(FileSystemEventHandler):
         filexts = []
 
         # remove pdfs, imgs, exes, and misc out of list
-        items.remove("PDF's")
-        items.remove("EXE's")
-        items.remove("Misc")
-        items.remove("Images")
+        try:
+            items.remove("PDF's")
+            items.remove("EXE's")
+            items.remove("Misc")
+            items.remove("Images")
+        except ValueError:
+            pass
 
         # splits filenames and file extensions into seperate lists
         for x in range(len(items)):
