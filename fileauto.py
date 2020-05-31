@@ -57,7 +57,7 @@ class FileHandler(FileSystemEventHandler):
 
         # splits each file type into different lists
         for x in range(len(items)):
-            if filexts[x] == '.pdf':
+            if filexts[x] == '.pdf' or filexts[x] == '.doc' or filexts[x] == '.docx':
                 shutil.move(items[x], pdfdir)
 
             elif filexts[x] == '.jpg' or filexts[x] == '.png' or filexts[x] == '.jpeg':
