@@ -5,10 +5,20 @@ import sys
 import time
 import logging
 import pathlib
+import datetime
 from dotenv import load_dotenv
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 load_dotenv()
+
+def moveDir(item, path, itemname, itemext):
+    try:
+        shutil.move(item, path)
+    except shutil.Error:
+        dt = str(datetime.datetime.now().second)
+        newname = itemname + '_' + dt + itemext
+        os.rename(item, newname)
+        shutil.move(newname, path)
 
 # set current working directory to Downloads folder
 os.chdir(os.environ['PATH_TO_DOWNLOADS'])
@@ -58,19 +68,22 @@ class FileHandler(FileSystemEventHandler):
         # splits each file type into different lists
         for x in range(len(items)):
             if filexts[x] == '.pdf' or filexts[x] == '.doc' or filexts[x] == '.docx':
-                shutil.move(items[x], pdfdir)
+                moveDir(items[x], pdfdir, filenames[x], filexts[x])
 
             elif filexts[x] == '.jpg' or filexts[x] == '.png' or filexts[x] == '.jpeg':
-                shutil.move(items[x], imgdir)
+                moveDir(items[x], imgdir, filenames[x], filexts[x])
 
             elif filexts[x] == '.exe':
-                shutil.move(items[x], exedir)
+                moveDir(items[x], exedir, filenames[x], filexts[x])
 
             elif filexts[x] == '.zip':
-                shutil.move(items[x], zipdir)
+                moveDir(items[x], zipdir, filenames[x], filexts[x])
 
             elif filexts[x] == '':
-                shutil.move(items[x], miscdir)
+                moveDir(items[x], miscdir, filenames[x], filexts[x])
+            
+            else:
+                moveDir(items[x], miscdir, filenames[x], filexts[x])
 
 
 # path to Downloads folder
