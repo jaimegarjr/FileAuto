@@ -9,11 +9,17 @@ import datetime
 from dotenv import load_dotenv
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+
+# loads in path from .env file
 load_dotenv()
 
+# function to handle name error checking before moving file
 def moveDir(item, path, itemname, itemext):
+    # if no error
     try:
         shutil.move(item, path)
+    
+    # if shutil.Error comes up, rename and move
     except shutil.Error:
         dt = str(datetime.datetime.now().second)
         newname = itemname + '_' + dt + itemext
@@ -23,11 +29,14 @@ def moveDir(item, path, itemname, itemext):
 # set current working directory to Downloads folder
 os.chdir(os.environ['PATH_TO_DOWNLOADS'])
 
-
 # class for file handling
 class FileHandler(FileSystemEventHandler):
     # when Downloads folder is modified
     def on_modified(self, event):
+        
+        # wait time in order to let file somewhat download
+        time.sleep(5)
+
         # if directories don't exist, create them
         pathlib.Path('PDF\'s').mkdir(parents=True, exist_ok=True)
         pathlib.Path('Images').mkdir(parents=True, exist_ok=True)
