@@ -38,7 +38,3 @@ However, if you're interested in making the script run in the background at all 
 8. Before continuing, select the 'Action:' drop down menu, and select the 'Start a program' option.
 9. Next, click on the Triggers tab, and select 'New...'. From here, you can simply open the drop down menu to select 'On system startup'. This will start the python script at startup so it will consistently clean and organize your Downloads folder. In the case that the script stops working, simply come back to Task Scheduler and restart the task from the list of tasks in the main task list.
 10. You're done! Enjoy :).
-
-## **_Mac Usage_**
-
-FIXME: Coming Soon!
