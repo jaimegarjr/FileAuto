@@ -36,7 +36,7 @@ However, if you're interested in making the script run in the background at all 
 6. Next, in the 'Add arguments box', type in the name of the FileAuto script, in this case it would just be ```fileauto.py```.
 7. In the 'Start in' box, you'd want to type in the path to the FileAuto script - this is why I mentioned this in step 1 in order to comfortably find the fileauto.py path. (Example: C:/Users/youruser/Projects/FileAuto)
 8. Before continuing, select the 'Action:' drop down menu, and select the 'Start a program' option.
-9. Next, click on the Triggers tab, and select 'New...'. From here, you can simply open the drop down menue to select 'On system startup'. This will start the python script at startup so it will consistently clean and organize your Downloads folder. In the case that the script stops working, simply come back to Task Scheduler and restart the task from the list of tasks in the main task list.
+9. Next, click on the Triggers tab, and select 'New...'. From here, you can simply open the drop down menu to select 'On system startup'. This will start the python script at startup so it will consistently clean and organize your Downloads folder. In the case that the script stops working, simply come back to Task Scheduler and restart the task from the list of tasks in the main task list.
 10. You're done! Enjoy :).
 
 ## **_Mac Usage_**
